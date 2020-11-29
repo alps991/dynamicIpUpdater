@@ -8,8 +8,8 @@ const port = process.env.PORT || 3001;
 app.get('/api/ip/:site', async (req, res) => {
     let ip = req.headers["x-forwarded-for"];
     if (ip) {
-        var list = ipAddr.split(",");
-        ip = list[list.length - 1];
+        const ipList = ipAddr.split(",");
+        ip = ipList[ipList.length - 1];
     } else {
         ip = req.connection.remoteAddress;
     }
