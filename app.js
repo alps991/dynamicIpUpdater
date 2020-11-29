@@ -3,6 +3,7 @@ const Site = require('./models/site');
 require('./db/mongoose');
 
 const app = express();
+const port = process.env.PORT || 3001;
 
 app.get('/api/ip/:site', async (req, res) => {
     const site = req.params.site;
@@ -29,6 +30,6 @@ app.get('/api/ip/:site', async (req, res) => {
     }
 });
 
-app.listen(3001, () => {
-    console.log("App is running on 3001");
+app.listen(port, () => {
+    console.log("App is running on " + port);
 });
