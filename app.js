@@ -6,8 +6,16 @@ const app = express();
 const port = process.env.PORT || 3001;
 
 app.get('/api/ip/:site', async (req, res) => {
+    let ip = req.headers["x-forwarded-for"];
+    if (ip) {
+        var list = ipAddr.split(",");
+        ip = list[list.length - 1];
+    } else {
+        ip = req.connection.remoteAddress;
+    }
+
     const site = req.params.site;
-    const ip = req.ip.slice(7);
+    //const ip = req.ip.slice(7);
     try {
         let existingSite = await Site.findOne({ site });
         if (existingSite) {
